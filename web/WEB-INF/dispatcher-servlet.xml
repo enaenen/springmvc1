@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <context:component-scan base-package="com.example.springmvc.controller"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--클라이언트 한테 xml 을 보여줄건지 jsp 를 보여줄건지 결정-->
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+<!-- IOC -->
+    <!--직접 bean을 초기화 해주는 방법(null생성자 이후 set)-->
+    <bean id="member2" class="com.example.springmvc.controller.Member">
+      <property name="id" value="user2"/>
+        <property name="pwd" value="2222"/>
+      <property name="age" value="20"/>
+    </bean>
+
+    <!--생성자를 이용한 방법(생성자에 있는 순서대로 써야한다.순서를 지정하고 싶으면
+    프로퍼티에 name 이나 type 명시)-->
+
+<!--    <bean id="member2" class="com.example.springmvc.controller.Member">
+        <constructor-arg type="java.lang.String" name="id">
+            <value>user2</value>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String" name="pwd">
+            <value>2222</value>
+        </constructor-arg>
+        <constructor-arg type="int">
+            <value>20</value>
+        </constructor-arg>
+    </bean>-->
+
+
+    <!-- 클라이언트한테 응답해줄때 index.jsp를 보여주고싶다
+    index.jsp 는 /WEB-INF/views/index.jsp
+    index로 요청을 하면 -> WEB-INF/views/ + index + .jsp 를 하게된다.
+    -->
+</beans>
